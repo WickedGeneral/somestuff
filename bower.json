@@ -1,0 +1,22 @@
+{
+  "name": "ContactBook",
+  "description": "ContactBook",
+  "main": "gulpfile.js",
+  "authors": [
+    "Andrew B"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^3.3.0",
+    "angular-local-storage": "^0.7.1"
+  }
+}

@@ -1,0 +1,85 @@
+<div class="container">
+  <h1 class="text-center">My Contacts</h1>
+  <br>
+  <div class="row">
+    <div class="form-group col-xs-9 col-sm-4 col-lg-3">
+      <label for="search">Search by First Name:</label>
+      <input type="text" class="form-control" id="search" ng-change="viewSearchResults(searchSubstr)" ng-model="searchSubstr" placeholder="Let's find someone">
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered" style="border-radius:4px;">
+      <tr ng-show="contactList.length == 0"><td colspan="5" class="text-center"><h2>You have no contacts. Let's add some !</h2></td></tr>
+      <tr ng-show="emptySearchRes && contactList.length != 0 && !showAllRes"  ><td colspan="5" class="text-center"><h2>There is no such results. Let's try again !</h2></td></tr>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Second Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody ng-show="contactList.length != 0 && !emptySearchRes">
+        <tr ng-repeat="contact in contactList | orderBy:'firstName'" ng-show="contact.showAsFilterRes || contact.showAsFilterRes == undefined || showAllRes" ng-hide="!contact.showAsFilterRes && contact.showAsFilterRes != undefined"> <!-- grouped by capital letter of name -->
+          <td>{{contact.firstName}}</td>
+          <td>{{contact.secondName}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.phone}}</td>
+          <td>
+            <button class="btn btn-info" ng-click="editContact(contact)" data-toggle="modal" data-target="#myModal">Edit</button>
+            <button class="btn btn-danger" ng-click="deleteContact(contact)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" ng-click="initNewContact()">Add Contact</button>
+  </div>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" ng-click="resetCurrContact()">&times;</button>
+          <h4 class="modal-title">Fill contact info:</h4>
+        </div>
+        <div class="modal-body">
+          <form name="contactForm">
+              <div class="input-group">
+                <label for="firstName">First name:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" ng-model="currContact.firstName">
+                <br>
+                <!-- <div class="alert alert-danger" role="alert" ng-show="!contactForm.firstName.$error.pattern && !contactForm.firstName.$untouched && !contactForm.$pristine">
+                  First Name is required field.
+                </div> -->
+              </div>
+              <br>
+              <div class="input-group">
+                <label for="secondName">Second name:</label>
+                <input type="text" class="form-control" id="secondName" name="secondName" placeholder="Second name" ng-model="currContact.secondName">
+                <br>
+              </div>
+              <br>
+              <div class="input-group">
+                <label for="phone">Phone:</label>
+                <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone number" ng-model="currContact.phone">
+                <br>
+              </div>
+              <br>
+              <div class="input-group">
+                <label for="phone">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" ng-model="currContact.email">
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button ng-show="currContact.id == null" type="button" class="btn btn-success" ng-click="saveContact(currContact)" ng-disabled="!contactForm.$valid || contactForm.$pristine">Add contact</button>
+          <button ng-show="currContact.id != null" type="button" class="btn btn-info" ng-click="saveContact(currContact)" ng-disabled="!contactForm.$valid || contactForm.$pristine">Edit contact</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="resetCurrContact()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

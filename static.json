@@ -1,0 +1,6 @@
+{
+  "result":true,
+  "data": [{"id":0,"firstName": "Adam", "secondName": "secondName", "phone": "8913223232", "email":"example@mail.ru"},
+  {"id":1, "firstName": "John", "secondName": "secondName", "phone": "8913223232", "email":"example@mail.ru"},{"id":2, "firstName": "Mike", "secondName": "Fellar2", "phone": "8913223232", "email":"example@mail.ru"},
+{"id":3, "firstName": "Derick", "secondName": "secondName", "phone": "8913223232", "email":"example@mail.ru"}]
+}
